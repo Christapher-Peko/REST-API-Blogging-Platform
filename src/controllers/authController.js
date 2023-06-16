@@ -24,7 +24,7 @@ const authController = {
         const payload = { user_name, password, email }
         const user = await authRepositories.createUser(payload)
 
-        return res.status(200).json({ message: 'User registered successfully', data: user })
+        return res.status(201).json({ message: 'User registered successfully', data: user })
     }),
 
 

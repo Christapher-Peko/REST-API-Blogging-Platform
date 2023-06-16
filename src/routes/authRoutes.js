@@ -9,7 +9,7 @@ const authRouter = (router) => {
    * '/api/v1/auth/signup':
    *  post:
    *     tags:
-   *     - User
+   *     - Authentication
    *     summary: Register a user 
    *     requestBody:
    *      required: true
@@ -18,7 +18,7 @@ const authRouter = (router) => {
    *           schema:
    *              $ref: '#/components/schemas/CreateUserInput'
    *     responses:
-   *      200:
+   *      201:
    *        description: Success
    *        content:
    *          application/json:
@@ -38,7 +38,7 @@ const authRouter = (router) => {
    * '/api/v1/auth/signin':
    *  post:
    *     tags:
-   *     - User
+   *     - Authentication
    *     summary: Signin with email and password
    *     requestBody:
    *      required: true
