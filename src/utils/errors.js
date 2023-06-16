@@ -15,6 +15,5 @@ export const ERROR = {
     NotFoundError: createErrorClass('NotFoundError', 404),
     BadRequestError: createErrorClass('BadRequestError', 400),
     InvalidInputError: createErrorClass('InvalidInputError', 422),
-    OtpMismatchError: createErrorClass('OtpMismatchError', 400), // New error class
-    OTPExpiredError: createErrorClass('OTPExpiredError', 400),
+    InvalidTokenError: createErrorClass('InvalidTokenError', 401),
 };
