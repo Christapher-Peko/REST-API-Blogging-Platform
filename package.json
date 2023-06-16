@@ -34,5 +34,10 @@
     "nodemon": "^2.0.22",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^4.6.3"
+  },
+  "devDependencies": {
+    "jest": "^29.5.0",
+    "mongodb-memory-server": "^8.13.0",
+    "supertest": "^6.3.3"
   }
 }
