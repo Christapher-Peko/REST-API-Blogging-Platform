@@ -8,7 +8,7 @@ import helmet from "helmet";
 import cookieParser from 'cookie-parser'
 import routes from "./src/routes/routes.js";
 import errorHandlingMiddleware from "./src/middleware/errorHandlingMiddleware.js";
-import swaggerDocs from "./src/utils/swagger.js";
+import swaggerDocs from "./docs/swagger.js";
 
 
 
