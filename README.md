@@ -1,2 +1,2 @@
-# Airline-Ticket-Booking
-Airline Ticket Booking MERN App
+# RESTful API for a Blogging Platform
+
