@@ -7,7 +7,6 @@ const authRepositories = {
     },
 
     createUser: async (userEntity) => {
-        console.log(userEntity);
         const user = new User(userEntity);
         return await user.save();
     },

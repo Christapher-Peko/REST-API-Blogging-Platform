@@ -1,5 +1,5 @@
 const errorHandlingMiddleware = (err, req, res, next) => {
-    console.log(err);
+    // console.log(err);
 
     // Extract the status code and error message from the error object
     const statusCode = err.statusCode || 500;

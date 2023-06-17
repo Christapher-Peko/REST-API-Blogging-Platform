@@ -57,7 +57,7 @@ const authController = {
         //attach to http only cookie in res
         authServices.attachTokenToCookie('jwt', token, res)
 
-        return res.status(200).json({ message: 'User signed n successfully', data: user })
+        return res.status(200).json({ message: 'User signed n successfully', data: existingUser })
     }),
 
 

@@ -33,6 +33,7 @@ const authRouter = (router) => {
    */
   router.route('/signup').post(validationSignup, authController.signup);
 
+
   /**
    * @openapi
    * '/api/v1/auth/signin':
@@ -60,7 +61,7 @@ const authRouter = (router) => {
    *      400:
    *        description: Bad request
    */
-  router.route('/signin').post(validateSignin,authController.logOut);
+  router.route('/signin').post(validateSignin,authController.signin);
 
 
   router.route('/logout').post(authController.logOut);

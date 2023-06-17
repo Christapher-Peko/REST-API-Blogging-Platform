@@ -3,30 +3,7 @@ import mongoose from 'mongoose';
 import request from 'supertest';
 import { app } from '../app.js';
 
-// declare global {
-//   namespace NodeJS {
-//     interface Global {
-//       signin(): Promise<string[]>;
-//     }
-//   }
-// }
-
-// declare global {
-//   namespace NodeJS {
-//     interface Global {
-//       signin(): string[];
-//     }
-//   }
-// }
-
-
-// declare global {
-//   var signin: () =>string[];
-// }
-
-
-
-// let mongo: any;
+let mongo; // Declare the mongo variable
 
 // config run before all test
 beforeAll(async () => {
@@ -40,7 +17,8 @@ beforeAll(async () => {
         // useUnifiedTopology: true
     });
 });
-// config run before all test-- clear db
+
+// config run before each test - clear DB
 beforeEach(async () => {
     const collections = await mongoose.connection.db.collections();
     for (let collection of collections) {
@@ -48,27 +26,9 @@ beforeEach(async () => {
     }
 });
 
-
 afterAll(async () => {
     await mongo.stop();
     await mongoose.connection.close();
 });
 
-
-
-// global.signin = async () => {
-//   const email = 'test@test.com';
-//   const password = 'password';
-
-//   const response = await request(app)
-//     .post('/api/users/signup')
-//     .send({
-//       email,
-//       password
-//     })
-//     .expect(201);
-
-//   const cookie = response.get('Set-Cookie');
-
-//   return cookie;
-// };
+// Add your tests here
