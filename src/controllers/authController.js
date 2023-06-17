@@ -8,7 +8,7 @@ import { successResponse } from '../middleware/successResponse.js';
 const authController = {
     /**
      * @desc user signup, with user name email password
-     * @route  POST /auth/signup
+     * @route  POST api/v1/auth/signup
      * @access public
      */
     signup: asyncHandler(async (req, res, next) => {
@@ -32,7 +32,7 @@ const authController = {
 
     /**
     * @desc user can login in with email and password
-    * @route  POST /auth/signin
+    * @route  POST api/v1/auth/signin
     * @access public
     */
     signin: asyncHandler(async (req, res, next) => {
@@ -60,9 +60,11 @@ const authController = {
     }),
 
 
-
-
-
+    /**
+     * @desc logout user and clear cookie
+     * @route  POST api/v1/auth/logout
+     * @access public
+     */
     logOut: asyncHandler(async (req, res, next) => {
         res.clearCookie('jwt')
         return res.success(200, 'User logout successfully');

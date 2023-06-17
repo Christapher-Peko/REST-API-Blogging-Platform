@@ -72,3 +72,20 @@
  *            _id:
  *              type: string
  */
+
+
+
+/**
+ * @openapi
+ * components:
+ *  schemas:
+ *    LogoutResponse:
+ *      type: object
+ *      properties:
+ *        message:
+ *          type: string
+ *          example: User logout successfully
+ *        data:
+ *          type: null
+ *          nullable: true
+ */

@@ -61,10 +61,31 @@ const authRouter = (router) => {
    *      400:
    *        description: Bad request
    */
-  router.route('/signin').post(validateSignin,authController.signin);
+  router.route('/signin').post(validateSignin, authController.signin);
 
-
+  /**
+   * @openapi
+   * '/api/v1/auth/logout':
+   *   post:
+   *     tags:
+   *       - Authentication
+   *     summary: User sign out
+   *     requestBody:
+   *      required: false
+   *     responses:
+   *       200:
+   *         description: Successful sign out
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/LogoutResponse'
+   *       401:
+   *         description: Unauthorized
+   *       500:
+   *         description: Internal server error
+   */
   router.route('/logout').post(authController.logOut);
+
 
   return router;
 }

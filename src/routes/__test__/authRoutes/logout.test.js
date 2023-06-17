@@ -23,6 +23,8 @@ describe('Sign out', () => {
             .send({})
             
         expect(res.statusCode).toEqual(200);
+        expect(res.body.message).toEqual("User logout successfully");
+        expect(res.body.data).toEqual(null);
         expect(res.get('Set-Cookie')[0]).toEqual(
             'jwt=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT'
         );
