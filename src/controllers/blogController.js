@@ -52,16 +52,32 @@ const blogController = {
      * @access privet
      */
     updateBlog: asyncHandler(async (req, res, next) => {
-        const blogId = req.params.id;
-        if (!blogId) throw new ERROR.BadRequestError('Please enter choose valid blog');
-
         const { title, content } = req.body;
+        const blogId = req.params.id;
+        const userId = req.currentUser.userId;
+
+        if (!blogId) {
+            throw new ERROR.BadRequestError('Blog id required');
+        }
+
+        // Retrieve the blog from the data storage
+        const blog = await blogRepositories.getBlogById(blogId);
+
+        // Check if the blog exists
+        if (!blog) {
+            throw new ERROR.NotFoundError('Blog not found..');
+        }
+
+        if (blog.author.toString() !== userId) {
+            // User is not authorized to delete the blog
+            throw new ERROR.ForbiddenError('You are not authorized to edit this blog');
+        }
+
 
         const updatedData = { title, content };
         const updatedBlog = await blogRepositories.updateBlog(blogId, updatedData);
 
         if (!updatedBlog) throw new ERROR.NotFoundError('Blog not found');
-
 
         return res.success(200, 'Blog updated successfully', updatedBlog);
     }),
@@ -76,6 +92,9 @@ const blogController = {
     deleteBlog: asyncHandler(async (req, res, next) => {
         const blogId = req.params.id;
         const userId = req.currentUser.userId;
+
+        if (!blogId) throw new ERROR.BadRequestError('Blog id required');
+
 
         // Retrieve the blog from the data storage
         const blog = await blogRepositories.getBlogById(blogId);
