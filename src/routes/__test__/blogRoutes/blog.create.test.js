@@ -3,17 +3,15 @@ import { app } from '../../../app';
 import getCookie from '../../../test/auth.helper';
 // import getCookie from '../../../test/auth.helper';
 
+const blogData = {
+    title: 'Test Blog',
+    content: 'This is a test blog content.',
+    tags: ['test', 'blog'],
+};
+
 describe('Create Blog', () => {
     it('should create a new blog and return a 201 status code', async () => {
-
         const cookie = await getCookie()
-
-        const blogData = {
-            title: 'Test Blog',
-            content: 'This is a test blog content.',
-            tags: ['test', 'blog'],
-        };
-
         const res = await request(app)
             .post('/api/v1/blogs')
             .set('Cookie', cookie)
@@ -25,11 +23,6 @@ describe('Create Blog', () => {
     });
 
     it('should return a 401 status code when unauthorized user access', async () => {
-        const blogData = {
-            title: 'Test Blog',
-            content: 'This is a test blog content.',
-            tags: ['test', 'blog'],
-        };
         const res = await request(app)
             .post('/api/v1/blogs')
             .send(blogData);
@@ -46,7 +39,6 @@ describe('Create Blog', () => {
             author: 'Author Name',
             tags: ['test', 'blog'],
         };
-
         const res = await request(app)
             .post('/api/v1/blogs')
             .set('Cookie', cookie)

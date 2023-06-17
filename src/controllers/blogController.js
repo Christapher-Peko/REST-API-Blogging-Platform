@@ -6,7 +6,7 @@ const blogController = {
     /**
      * @desc Create a new blog
      * @route  POST /api/v1/blogs
-     * @access Public
+     * @access privet
      */
     createBlog: asyncHandler(async (req, res, next) => {
         const { title, content, tags } = req.body;
@@ -36,6 +36,11 @@ const blogController = {
      */
     getBlogById: asyncHandler(async (req, res, next) => {
         const blogId = req.params.id;
+        if (!blogId) {
+            console.log("inside");
+            throw new ERROR.BadRequestError('Please enter choose valid blog');
+        }
+        console.log("out");
         const blog = await blogRepositories.getBlogById(blogId);
 
         if (!blog) {
@@ -48,7 +53,7 @@ const blogController = {
     /**
      * @desc Update a blog
      * @route  PUT /api/v1/blogs/:id
-     * @access Public
+     * @access privet
      */
     updateBlog: asyncHandler(async (req, res, next) => {
         const blogId = req.params.id;
@@ -63,6 +68,8 @@ const blogController = {
 
         return res.success(200, 'Blog updated successfully', updatedBlog);
     }),
+
+
 
     /**
      * @desc Delete a blog
