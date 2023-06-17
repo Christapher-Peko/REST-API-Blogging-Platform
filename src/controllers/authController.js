@@ -2,8 +2,6 @@ import asyncHandler from 'express-async-handler';
 import { ERROR } from '../utils/errors.js';
 import authRepositories from '../repositories/authRepositories.js';
 import authServices from '../services/authServices.js';
-import config from '../config/env.config.js';
-import { successResponse } from '../middleware/successResponse.js';
 
 const authController = {
     /**

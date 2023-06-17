@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import { ERROR } from "../utils/errors.js";
 
 const authenticate = () => (req, res, next) => {
+
     if (!req.cookies['jwt']) {
         return next();
     }

@@ -1,7 +1,9 @@
-const authorize = (requiredRoles) => (req, res, next) => {
+import { ERROR } from "../utils/errors.js";
+
+const authorize = () => (req, res, next) => {
     const currentUser = req.currentUser;
     if (!currentUser) {
-        return res.status(401).json({ error: "Unauthorized: User not authenticated" });
+        throw new ERROR.InvalidTokenError("Unauthorized: User not authenticated")
     }
     next();
 };

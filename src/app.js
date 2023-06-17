@@ -7,6 +7,7 @@ import cookieParser from 'cookie-parser'
 import routes from "./routes/routes.js";
 import errorHandlingMiddleware from "./middleware/errorHandlingMiddleware.js";
 import { successResponse } from "./middleware/successResponse.js";
+import authenticate from "./middleware/authenticate.js";
 
 const app = express()
 const router = express.Router()
@@ -20,7 +21,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(helmet({ xssFilter: true }))
 app.use(mongoSanitize())
-
+app.use(authenticate())
 //routes
 routes(app, router);
 

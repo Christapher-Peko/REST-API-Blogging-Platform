@@ -65,4 +65,20 @@ const validateSignin = [
     handleValidationErrors
 ];
 
-export { validationSignup, validateSignin };
+const validateCreateBlog = [
+    body('*').trim().escape(),
+    body('title')
+        .notEmpty()
+        .withMessage('Title is required')
+        .isLength({ max: 100 })
+        .withMessage('Title must be less than or equal to 100 characters'),
+
+    body('content')
+        .notEmpty()
+        .withMessage('Content is required'), 
+    
+
+    handleValidationErrors,
+];
+
+export { validationSignup, validateSignin,validateCreateBlog };
