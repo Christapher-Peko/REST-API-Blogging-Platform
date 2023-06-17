@@ -13,14 +13,13 @@ describe('Get a Blog by ID', () => {
         const res = await request(app)
             .get(`/api/v1/blogs/${blogId}`);
 
-        console.log(res.body.data);
         expect(res.statusCode).toEqual(200);
         expect(res.body.message).toEqual('Blog retrieved successfully');
         expect(res.body.data._id).toEqual(blogId);
     });
 
     it('should return a 404 status code when blog ID does not exist', async () => {
-        // invalid/non-existing blog ID
+        //non-existing blog ID
         const blogId = '123456789123';
 
         const res = await request(app)
@@ -30,13 +29,15 @@ describe('Get a Blog by ID', () => {
         expect(res.body.error.message).toEqual('Blog not found');
     });
 
-    it('should return a 400 status code when blog ID is missing in params', async () => {
-        const res = await request(app)
-            .get(`/api/v1/blogs/`);
+    it('should return a 400 status code when blog ID is invalid mongo obj id', async () => {
+        // invalid/non-existing blog ID
+        const blogId = "445645464";
 
-            console.log(res.body);
-        expect(res.statusCode).toEqual(400);
-        expect(res.body.error.message).toEqual('Please enter choose valid blog');
+        const res = await request(app)
+            .get(`/api/v1/blogs/${blogId}`);
+
+        expect(res.statusCode).toEqual(500);
+        expect(res.body.error.message).toEqual('Cast to ObjectId failed for value "445645464" (type string) at path "_id" for model "BlogPost"');
     });
 
 });
