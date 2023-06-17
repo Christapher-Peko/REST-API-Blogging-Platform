@@ -18,11 +18,12 @@ describe('Sign out', () => {
                 email: 'a@a.com',
                 password: 'password',
             })
-        const response = await request(app)
+        const res = await request(app)
             .post('/api/v1/auth/logout')
             .send({})
-            .expect(200);
-        expect(response.get('Set-Cookie')[0]).toEqual(
+            
+        expect(res.statusCode).toEqual(200);
+        expect(res.get('Set-Cookie')[0]).toEqual(
             'jwt=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT'
         );
 

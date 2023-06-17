@@ -76,3 +76,28 @@ describe('Sign-up endpoint', () => {
  *         image:
  *           type: string
  */
+
+
+
+
+import { successResponse } from '../path/to/successResponse';
+
+const authController = {
+  signup: asyncHandler(async (req, res, next) => {
+    let { user_name, email, password } = req.body;
+
+    const existingUser = await authRepositories.findUserByEmail(email);
+    if (existingUser) {
+      throw new ERROR.UserExistsError('This email is already registered!');
+    }
+
+    password = await authServices.bcrypt(password);
+
+    const payload = { user_name, password, email };
+    const user = await authRepositories.createUser(payload);
+
+    return res.success(user, 'User registered successfully', 201);
+  }),
+};
+
+export default authController;

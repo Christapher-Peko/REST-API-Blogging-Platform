@@ -3,32 +3,31 @@ import { ERROR } from '../utils/errors.js';
 import authRepositories from '../repositories/authRepositories.js';
 import authServices from '../services/authServices.js';
 import config from '../config/env.config.js';
+import { successResponse } from '../middleware/successResponse.js';
 
 const authController = {
     /**
-    * @desc user signup, with user name email password
-    * @route  POST /auth/signup
-    * @access public
-    */
+     * @desc user signup, with user name email password
+     * @route  POST /auth/signup
+     * @access public
+     */
     signup: asyncHandler(async (req, res, next) => {
-        let { user_name, email, password } = req.body
+        let { user_name, email, password } = req.body;
 
-        //check existing user with  email 
-        const existingUser = await authRepositories.findUserByEmail(email)
-        if (existingUser) throw new ERROR.UserExistsError("This email is already registered!")
+        // Check existing user with email
+        const existingUser = await authRepositories.findUserByEmail(email);
+        if (existingUser) throw new ERROR.UserExistsError('This email is already registered!');
 
         // Hash password and create candidate
-        password = await authServices.bcrypt(password)
+        password = await authServices.bcrypt(password);
 
-        //create user 
-        const payload = { user_name, password, email }
-        const user = await authRepositories.createUser(payload)
+        // Create user
+        const payload = { user_name, password, email };
+        const user = await authRepositories.createUser(payload);
 
-        return res.status(201).json({ message: 'User registered successfully', data: user })
+
+        return res.success(201, 'User registered successfully', user);
     }),
-
-
-
 
 
     /**
@@ -48,7 +47,7 @@ const authController = {
         if (!isVerified) throw new ERROR.BadRequestError("Wrong password!")
 
         //after verification write a jwt 
-         const payload = {
+        const payload = {
             userId: existingUser._id.toString(),
             email: existingUser.email,
         }
@@ -57,12 +56,8 @@ const authController = {
         //attach to http only cookie in res
         authServices.attachTokenToCookie('jwt', token, res)
 
-        return res.status(200).json({ message: 'User signed n successfully', data: existingUser })
+        return res.success(200, 'User signed n successfully',existingUser);
     }),
-
-
-
-
 
 
 
@@ -70,9 +65,11 @@ const authController = {
 
     logOut: asyncHandler(async (req, res, next) => {
         res.clearCookie('jwt')
-        res.status(200).json({ message: 'logout successful' })
+        return res.success(200, 'User logout successfully');
     }),
 
 };
+
+
 
 export default authController;
