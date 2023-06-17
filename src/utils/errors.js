@@ -16,4 +16,5 @@ export const ERROR = {
     BadRequestError: createErrorClass('BadRequestError', 400),
     InvalidInputError: createErrorClass('InvalidInputError', 422),
     InvalidTokenError: createErrorClass('InvalidTokenError', 401),
+    ForbiddenError: createErrorClass('InvalidTokenError', 403),
 };

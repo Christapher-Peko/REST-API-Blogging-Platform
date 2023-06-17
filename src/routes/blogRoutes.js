@@ -51,7 +51,6 @@ const blogRouter = (router) => {
    *             schema:
    *               $ref: '#/components/schemas/InternalServerError'
    */
-
   router.route('/').post(authorize(),validateCreateBlog, blogController.createBlog);
 
 
@@ -117,7 +116,7 @@ const blogRouter = (router) => {
    *       500:
    *         description: Internal server error
    */
-  router.route('/:id').put(blogController.updateBlog);
+  router.route('/:id').put(authorize(),blogController.updateBlog);
 
 
   /**
@@ -142,7 +141,7 @@ const blogRouter = (router) => {
  *       500:
  *         description: Internal server error
  */
-  router.route('/:id').delete(blogController.deleteBlog);
+  router.route('/:id').delete(authorize(),blogController.deleteBlog);
 
   return router;
 }

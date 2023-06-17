@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { app } from '../../../app';
 import getCookie from '../../../test/auth.helper';
-import createBlog from '../../../test/bloag.helper';
+import { createBlog } from '../../../test/bloag.helper';
 // import getCookie from '../../../test/auth.helper';
 
 

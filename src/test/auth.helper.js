@@ -9,7 +9,7 @@ async function getCookie() {
         .post('/api/v1/auth/signup')
         .send({
             user_name: 'Test Name',
-            email: 'a@a.com',
+            email: 'a@b.com',
             password: 'password',
             confirm_password: 'password'
         })
@@ -17,7 +17,7 @@ async function getCookie() {
     const authResponse = await request(app)
         .post('/api/v1/auth/signin')
         .send({
-            email: 'a@a.com',
+            email: 'a@b.com',
             password: 'password',
         })
         .expect(200)

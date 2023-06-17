@@ -1,7 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import { ERROR } from '../utils/errors.js';
 import blogRepositories from '../repositories/blogRepositories.js';
-
+import { ObjectId } from 'mongodb';
 const blogController = {
     /**
      * @desc Create a new blog
@@ -36,11 +36,7 @@ const blogController = {
      */
     getBlogById: asyncHandler(async (req, res, next) => {
         const blogId = req.params.id;
-        if (!blogId) {
-            console.log("inside");
-            throw new ERROR.BadRequestError('Please enter choose valid blog');
-        }
-        console.log("out");
+
         const blog = await blogRepositories.getBlogById(blogId);
 
         if (!blog) {
@@ -57,14 +53,15 @@ const blogController = {
      */
     updateBlog: asyncHandler(async (req, res, next) => {
         const blogId = req.params.id;
+        if (!blogId) throw new ERROR.BadRequestError('Please enter choose valid blog');
+
         const { title, content } = req.body;
 
         const updatedData = { title, content };
         const updatedBlog = await blogRepositories.updateBlog(blogId, updatedData);
 
-        if (!updatedBlog) {
-            throw new ERROR.NotFoundError('Blog not found');
-        }
+        if (!updatedBlog) throw new ERROR.NotFoundError('Blog not found');
+
 
         return res.success(200, 'Blog updated successfully', updatedBlog);
     }),
@@ -74,17 +71,34 @@ const blogController = {
     /**
      * @desc Delete a blog
      * @route  DELETE /api/v1/blogs/:id
-     * @access Public
+     * @access Private
      */
     deleteBlog: asyncHandler(async (req, res, next) => {
         const blogId = req.params.id;
-        const deletedBlog = await blogRepositories.deleteBlog(blogId);
+        const userId = req.currentUser.userId;
 
-        if (!deletedBlog) {
+        // Retrieve the blog from the data storage
+        const blog = await blogRepositories.getBlogById(blogId);
+
+        // Check if the blog exists
+        if (!blog) {
             throw new ERROR.NotFoundError('Blog not found');
         }
 
-        return res.success(200, 'Blog deleted successfully', null);
+        if (blog.author.toString() !== userId) {
+            // User is not authorized to delete the blog
+            throw new ERROR.ForbiddenError('You are not authorized to delete this blog');
+        }
+
+        // Delete the blog
+        const deletedBlog = await blogRepositories.deleteBlog(blogId);
+
+        // Check if the blog was successfully deleted
+        if (!deletedBlog) {
+            throw new ERROR.NotFoundError('Blog not deleted successfully');
+        }
+
+        return res.success(200, 'Blog deleted successfully');
     }),
 };
 

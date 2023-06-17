@@ -13,7 +13,8 @@ const app = express()
 const router = express.Router()
 
 //middleware
-app.use(successResponse)  //handle unified success response
+app.use(successResponse)  //handle success response
+
 app.use(cors())
 app.use(morgan('dev'));
 app.use(express.json());
@@ -21,10 +22,10 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(helmet({ xssFilter: true }))
 app.use(mongoSanitize())
+
 app.use(authenticate())
 //routes
 routes(app, router);
-
 
 //errorhandler
 app.use(errorHandlingMiddleware)
