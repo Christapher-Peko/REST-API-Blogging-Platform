@@ -27,16 +27,19 @@
  *      properties:
  *        message:
  *          type: string
- *          default: User registered successfully
+ *          example: User registered successfully
  *        data:
  *          type: object
  *          properties:
  *            user_name:
  *              type: string
+ *              example: Jane Doe
  *            email:
  *              type: string
+ *              example: jane.doe@example.com
  *            _id:
  *              type: string
+ *              example: abc123
  */
 
 
@@ -89,3 +92,17 @@
  *          type: null
  *          nullable: true
  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+

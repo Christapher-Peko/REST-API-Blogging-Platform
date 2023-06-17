@@ -51,7 +51,7 @@ const blogRouter = (router) => {
    *             schema:
    *               $ref: '#/components/schemas/InternalServerError'
    */
-  router.route('/').post(authorize(),validateCreateBlog, blogController.createBlog);
+  router.route('/').post(authorize(), validateCreateBlog, blogController.createBlog);
 
 
   /**
@@ -116,32 +116,32 @@ const blogRouter = (router) => {
    *       500:
    *         description: Internal server error
    */
-  router.route('/:id').put(authorize(),blogController.updateBlog);
+  router.route('/:id').put(authorize(), blogController.updateBlog);
 
 
   /**
- * @openapi
- * '/api/v1/blogs/:id':
- *   delete:
- *     tags:
- *       - Blogs
- *     summary: Delete a blog by ID
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: ID of the blog
- *     responses:
- *       204:
- *         description: Success
- *       404:
- *         description: Not found
- *       500:
- *         description: Internal server error
- */
-  router.route('/:id').delete(authorize(),blogController.deleteBlog);
+   * @openapi
+   * '/api/v1/blogs/:id':
+   *   delete:
+   *     tags:
+   *       - Blogs
+   *     summary: Delete a blog by ID
+   *     parameters:
+   *       - in: path
+   *         name: id
+   *         required: true
+   *         schema:
+   *           type: string
+   *         description: ID of the blog
+   *     responses:
+   *       204:
+   *         description: Success
+   *       404:
+   *         description: Not found
+   *       500:
+   *         description: Internal server error
+   */
+  router.route('/:id').delete(authorize(), blogController.deleteBlog);
 
   return router;
 }

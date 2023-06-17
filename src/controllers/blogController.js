@@ -29,6 +29,9 @@ const blogController = {
         return res.success(200, 'Blogs retrieved successfully', blogs);
     }),
 
+
+
+    
     /**
      * @desc Get a blog by ID
      * @route  GET /api/v1/blogs/:id
@@ -45,6 +48,10 @@ const blogController = {
 
         return res.success(200, 'Blog retrieved successfully', blog);
     }),
+
+
+
+
 
     /**
      * @desc Update a blog
