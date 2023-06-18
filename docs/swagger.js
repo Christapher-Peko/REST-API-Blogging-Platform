@@ -5,9 +5,17 @@ const options = {
     definition: {
         openapi: "3.0.0",
         info: {
-            title: "REST API Docs for Blog application",
-            version:"1.0.0",
+            title: "REST API Docs for Blog Application",
+            version: "1.0.0",
+            description: "This is the API documentation for the Blog Application. It provides details about the available endpoints and their usage. To view more about the functionalities and source code, please visit the <a href='https://github.com/ChristapherAntony/BlogApplication'>GitHub repository</a>.",
+            url: "https://github.com/ChristapherAntony/BlogApplication",
+            contact: {
+                name: "Christapher Antony",
+                url: "https://www.linkedin.com/in/christapherantony-5568a3156/",
+            },
         },
+        
+        
         components: {
             securitySchemas: {
                 bearerAuth: {
