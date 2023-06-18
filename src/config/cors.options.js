@@ -4,7 +4,7 @@ const corsOptions = {
     credentials: true
 };
 
-export default corsOptions;
+export default corsOptions; 
 
 
  
