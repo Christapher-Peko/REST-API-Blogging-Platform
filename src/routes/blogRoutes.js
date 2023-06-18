@@ -4,7 +4,7 @@ import { validateCreateBlog } from "../middleware/validate.js";
 
 const blogRouter = (router) => {
 
-  
+
   /**
    * @openapi
    * '/api/v1/blogs':
@@ -12,7 +12,35 @@ const blogRouter = (router) => {
    *     tags:
    *       - Blogs
    *     summary: Get all blogs
-   *     description: Use this endpoint to retrieve all blogs.
+   *     description: |
+   *       Use this endpoint to retrieve all blogs. You can optionally provide the `page` and `limit` query parameters for pagination. The `page` parameter indicates the page number, and the `limit` parameter specifies the number of blogs to return per page.
+   *       Example: `/api/v1/blogs?page=1&limit=10` retrieves the first page of 10 blogs.
+   *  
+   *       If no `page` and `limit` parameters are provided, the default values are used (page: 1, limit: 10).
+   *
+   *       The response includes the array of blogs and pagination metadata in the `meta` field, including the total count of blogs, current page number, page size, and total number of pages.
+   *
+   *       Pagination metadata example:
+   *       ```
+   *       "meta": {
+   *         "total": 50,
+   *         "page": 1,
+   *         "pageSize": 10,
+   *         "totalPages": 5
+   *       }
+   *       ```
+   *
+   *     parameters:
+   *       - in: query
+   *         name: page
+   *         schema:
+   *           type: integer
+   *         description: The page number for pagination.
+   *       - in: query
+   *         name: limit
+   *         schema:
+   *           type: integer
+   *         description: The number of blogs to return per page.
    *     responses:
    *       200:
    *         description: Success
@@ -28,6 +56,7 @@ const blogRouter = (router) => {
    *               $ref: '#/components/schemas/InternalServerError'
    */
   router.route('/').get(blogController.getAllBlogs);
+
 
 
   /**
