@@ -39,6 +39,7 @@ const blogController = {
      */
     getBlogById: asyncHandler(async (req, res, next) => {
         const blogId = req.params.id;
+        console.log("thsi is id ",blogId);
 
         const blog = await blogRepositories.getBlogById(blogId);
 
