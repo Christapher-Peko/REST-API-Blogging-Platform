@@ -7,61 +7,108 @@ const authRouter = (router) => {
   /**
    * @openapi
    * '/api/v1/auth/signup':
-   *  post:
+   *   post:
    *     tags:
-   *     - Authentication
-   *     summary: Register a user 
+   *       - Authentication
+   *     summary: Register a user
+   *     description: Use this endpoint to register a new user.
    *     requestBody:
-   *      required: true
-   *      content:
-   *        application/json:
+   *       required: true
+   *       content:
+   *         application/json:
    *           schema:
-   *              $ref: '#/components/schemas/CreateUserInput'
+   *             $ref: '#/components/schemas/CreateUserInput'
    *     responses:
-   *      201:
-   *        description: Success
-   *        content:
-   *          application/json:
-   *            schema:
-   *              $ref: '#/components/schemas/CreateUserResponse'
-   *      409:
-   *        description: Conflict
-   *      422:
-   *        description: Validation error
-   *      400:
-   *        description: Bad request
+   *       201:
+   *         description: Success
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/CreateUserResponse'
+   *       400:
+   *         description: Bad request
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Error'
+   *       422:
+   *         description: Validation error occurred during user authentication
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Error'
+   *       409:
+   *         description: Conflict occurred during user authentication
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Error'
+   *       500:
+   *         description: Internal server error
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Error'
    */
   router.route('/signup').post(validationSignup, authController.signup);
+
 
 
   /**
    * @openapi
    * '/api/v1/auth/signin':
-   *  post:
+   *   post:
    *     tags:
-   *     - Authentication
-   *     summary: Signin with email and password
+   *       - Authentication
+   *     summary: Sign in with email and password
+   *     description: Use this endpoint to authenticate a user by providing their email and password.
    *     requestBody:
-   *      required: true
-   *      content:
-   *        application/json:
+   *       required: true
+   *       content:
+   *         application/json:
    *           schema:
-   *              $ref: '#/components/schemas/SigninUserInput'
+   *             $ref: '#/components/schemas/SigninUserInput'
    *     responses:
-   *      200:
-   *        description: Success
-   *        content:
-   *          application/json:
-   *            schema:
-   *              $ref: '#/components/schemas/SigninUserResponse'
-   *      409:
-   *        description: Conflict
-   *      422:
-   *        description: Validation error
-   *      400:
-   *        description: Bad request
+   *       200:
+   *         description: User authentication successful
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/SigninUserResponse'
+   *       400:
+   *         description: Invalid user credentials provided
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Error'
+   *       422:
+   *         description: Validation error occurred during user authentication
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Error'
+   *       404:
+   *         description: Requested user not found
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Error'
+   *       409:
+   *         description: Conflict occurred during user authentication
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Error'
+   *       500:
+   *         description: Internal server error
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Error'
    */
   router.route('/signin').post(validateSignin, authController.signin);
+
+
 
   /**
    * @openapi
@@ -70,21 +117,25 @@ const authRouter = (router) => {
    *     tags:
    *       - Authentication
    *     summary: User sign out
+   *     description: Use this endpoint to sign out a user.
    *     requestBody:
-   *      required: false
+   *       required: false
    *     responses:
    *       200:
-   *         description: Successful sign out
+   *         description: User sign out successful
    *         content:
    *           application/json:
    *             schema:
    *               $ref: '#/components/schemas/LogoutResponse'
-   *       401:
-   *         description: Unauthorized
    *       500:
    *         description: Internal server error
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Error'
    */
   router.route('/logout').post(authController.logOut);
+
 
 
   return router;
