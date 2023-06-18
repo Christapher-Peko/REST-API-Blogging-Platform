@@ -56,7 +56,7 @@ const blogRouter = (router) => {
 
   /**
    * @openapi
-   * '/api/v1/blogs/:id':
+   * '/api/v1/blogs/{id}':
    *   get:
    *     tags:
    *       - Blogs
@@ -84,7 +84,7 @@ const blogRouter = (router) => {
 
   /**
    * @openapi
-   * '/api/v1/blogs/:id':
+   * '/api/v1/blogs/{id}':
    *   put:
    *     tags:
    *       - Blogs
@@ -121,7 +121,7 @@ const blogRouter = (router) => {
 
   /**
    * @openapi
-   * '/api/v1/blogs/:id':
+   * '/api/v1/blogs/{id}':
    *   delete:
    *     tags:
    *       - Blogs

@@ -3,12 +3,14 @@ import { app } from '../../../app';
 import getCookie from '../../../test/auth.helper';
 import { createBlog } from '../../../test/bloag.helper';
 // import getCookie from '../../../test/auth.helper';
-
+const log = (...data) => console.log(...data);
 
 describe('Get a Blog by ID', () => {
     it('should return a blog and a 200 status code', async () => {
         // Create a blog
         const blogId = await createBlog();
+        const blogIdzz = "648e6b716f3654bc0bbe";
+        console.log(blogId, blogIdzz);
 
         const res = await request(app)
             .get(`/api/v1/blogs/${blogId}`);
@@ -16,7 +18,9 @@ describe('Get a Blog by ID', () => {
         expect(res.statusCode).toEqual(200);
         expect(res.body.message).toEqual('Blog retrieved successfully');
         expect(res.body.data._id).toEqual(blogId);
+        log(res.body)
     });
+
 
     it('should return a 404 status code when blog ID does not exist', async () => {
         //non-existing blog ID

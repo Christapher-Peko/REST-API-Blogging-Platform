@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "jest --watchAll --verbose --onlyChanged",
+    "test": "jest --watchAll",
+    "testdev": "jest --verbose --onlyChanged",
     "start": "nodemon src/index.js"
   },
   "babel": {
