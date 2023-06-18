@@ -13,7 +13,7 @@ To explore the complete functionalities and access the source code, please visit
 Try It Out:
 To test the API endpoints, please select the deployed server from the list below and authorize the requests with the following API key:
 
-API_KEY: <a>'Bearer 648f0c1e196c47ba4037f142'<a/>
+API_KEY: <a>"Bearer 648f0c1e196c47ba4037f142"<a/>
 
 Please note that the API key should be included in the 'Authorization' header as a Bearer token.
 
