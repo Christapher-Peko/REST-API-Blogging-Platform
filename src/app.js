@@ -8,6 +8,7 @@ import routes from "./routes/routes.js";
 import errorHandlingMiddleware from "./middleware/errorHandlingMiddleware.js";
 import { successResponse } from "./middleware/successResponse.js";
 import authenticate from "./middleware/authenticate.js";
+import checkApiKey from "./middleware/checkApiKey.js";
 
 const app = express()
 const router = express.Router()
@@ -22,8 +23,8 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(helmet({ xssFilter: true }))
 app.use(mongoSanitize())
-
-app.use(authenticate())
+app.use(checkApiKey)
+app.use(authenticate)
 //routes
 routes(app, router);
 

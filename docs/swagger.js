@@ -14,8 +14,17 @@ const options = {
                 url: "https://www.linkedin.com/in/christapherantony-5568a3156/",
             },
         },
-        
-        
+        servers: [
+            {
+                url: "http://localhost:3000/",
+                description:"This is a development server"
+            },
+            {
+                url: "https://testserver2.tk/",
+                description:"This is a deployed server"
+            }
+        ],
+
         components: {
             securitySchemas: {
                 bearerAuth: {
