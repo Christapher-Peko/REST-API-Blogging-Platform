@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(helmet({ xssFilter: true }))
 app.use(mongoSanitize())
 app.use(checkApiKey)
-app.use(authenticate)
+app.use(authenticate())
 //routes
 routes(app, router);
 
