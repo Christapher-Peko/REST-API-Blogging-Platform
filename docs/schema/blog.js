@@ -53,16 +53,36 @@
  */
 
 
-
-
 /**
  * @openapi
  * components:
  *   schemas:
  *     GetAllBlogsResponse:
- *       type: array
- *       items:
- *         $ref: '#/components/schemas/BlogPost'
+ *       type: object
+ *       properties:
+ *         meta:
+ *           $ref: '#/components/schemas/PaginationMeta'
+ *         blogs:
+ *           type: array
+ *           items:
+ *             $ref: '#/components/schemas/BlogPost'
+ * 
+ *     PaginationMeta:
+ *       type: object
+ *       properties:
+ *         total:
+ *           type: integer
+ *           example: 50
+ *         page:
+ *           type: integer
+ *           example: 1
+ *         pageSize:
+ *           type: integer
+ *           example: 10
+ *         totalPages:
+ *           type: integer
+ *           example: 5
+ * 
  *     BlogPost:
  *       type: object
  *       properties:
@@ -107,6 +127,7 @@
  *                 type: string
  *                 example: 2023-06-17T10:30:00Z
  */
+
 
 
 

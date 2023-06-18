@@ -25,13 +25,14 @@ const blogController = {
      * @access Public
      */
     getAllBlogs: asyncHandler(async (req, res, next) => {
-        const blogs = await blogRepositories.getAllBlogs();
+        const { page, limit } =req.query
+        const blogs = await blogRepositories.getAllBlogs(page, limit);
         return res.success(200, 'Blogs retrieved successfully', blogs);
     }),
 
 
 
-    
+
     /**
      * @desc Get a blog by ID
      * @route  GET /api/v1/blogs/:id
@@ -39,8 +40,8 @@ const blogController = {
      */
     getBlogById: asyncHandler(async (req, res, next) => {
         const blogId = req.params.id;
-        
-  
+
+
         const blog = await blogRepositories.getBlogById(blogId);
 
         if (!blog) {
@@ -76,7 +77,7 @@ const blogController = {
             throw new ERROR.NotFoundError('Blog not found..');
         }
 
-       
+
         if (blog.author._id.toString() !== userId) {
             // User is not authorized to delete the blog
             throw new ERROR.ForbiddenError('You are not authorized to edit this blog');
