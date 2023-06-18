@@ -63,7 +63,6 @@
  *       type: array
  *       items:
  *         $ref: '#/components/schemas/BlogPost'
- * 
  *     BlogPost:
  *       type: object
  *       properties:
@@ -162,16 +161,15 @@
  */
 
 
-
 /**
  * @openapi
  * components:
  *   schemas:
  *     UpdateBlogInput:
  *       type: object
- *      required:
- *        - title
- *        - content
+ *       required:
+ *         - title
+ *         - content
  *       properties:
  *         title:
  *           type: string
