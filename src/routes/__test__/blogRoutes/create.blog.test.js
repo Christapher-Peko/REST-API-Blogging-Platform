@@ -16,6 +16,7 @@ describe('Create Blog', () => {
             .post('/api/v1/blogs')
             .set('Cookie', cookie)
             .send(blogData);
+          
         expect(res.statusCode).toEqual(201);
         expect(res.body.message).toEqual('Blog created successfully');
         expect(res.body.data.title).toEqual(blogData.title);

@@ -7,7 +7,6 @@
  *      required:
  *        - title
  *        - content
- *        - author
  *      properties:
  *        title:
  *          type: string
@@ -15,9 +14,6 @@
  *        content:
  *          type: string
  *          default: Example Content
- *        author:
- *          type: string
- *          default: John Doe
  *    CreateBlogResponse:
  *      type: object
  *      properties:
@@ -173,6 +169,9 @@
  *   schemas:
  *     UpdateBlogInput:
  *       type: object
+ *      required:
+ *        - title
+ *        - content
  *       properties:
  *         title:
  *           type: string
@@ -180,10 +179,6 @@
  *         content:
  *           type: string
  *           example: Updated Content
- *         author:
- *           type: string
- *           example: John Doe
- * 
  *     UpdateBlogResponse:
  *       type: object
  *       properties:

@@ -76,7 +76,8 @@ const blogController = {
             throw new ERROR.NotFoundError('Blog not found..');
         }
 
-        if (blog.author.toString() !== userId) {
+       
+        if (blog.author._id.toString() !== userId) {
             // User is not authorized to delete the blog
             throw new ERROR.ForbiddenError('You are not authorized to edit this blog');
         }
@@ -112,7 +113,7 @@ const blogController = {
             throw new ERROR.NotFoundError('Blog not found');
         }
 
-        if (blog.author.toString() !== userId) {
+        if (blog.author._id.toString() !== userId) {
             // User is not authorized to delete the blog
             throw new ERROR.ForbiddenError('You are not authorized to delete this blog');
         }

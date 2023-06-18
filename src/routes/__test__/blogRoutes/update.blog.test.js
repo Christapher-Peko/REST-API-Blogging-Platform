@@ -23,10 +23,13 @@ describe('Update Blog by ID', () => {
       .set('Cookie', cookie)
       .send({ title: updatedTitle, content: updatedContent });
 
+
     expect(res.statusCode).toEqual(200);
     expect(res.body.message).toEqual('Blog updated successfully');
     expect(res.body.data.title).toEqual(updatedTitle);
     expect(res.body.data.content).toEqual(updatedContent);
+    
+    console.log(res.body);
   });
 
   it('should return a 401 status code when an unauthorized user tries to update a blog', async () => {

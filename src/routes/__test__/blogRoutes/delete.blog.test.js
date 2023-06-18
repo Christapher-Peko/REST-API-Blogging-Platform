@@ -17,10 +17,11 @@ describe('Delete Blog by ID', () => {
   
 
   it('should delete a blog and return a 200 status code', async () => {
+    
     const res = await request(app)
       .delete(`/api/v1/blogs/${blogId}`)
       .set('Cookie', cookie);
-
+      console.log(res.body);
     expect(res.statusCode).toEqual(200);
     expect(res.body.message).toEqual('Blog deleted successfully');
   });
