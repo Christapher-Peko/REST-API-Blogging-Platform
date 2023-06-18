@@ -7,6 +7,7 @@ const authenticate = () => (req, res, next) => {
     if (!req.cookies['jwt']) {
         return next();
     }
+
     try {
         const payload = jwt.verify(req.cookies['jwt'], config.jwtSecret);
         req.currentUser = payload;
@@ -14,6 +15,7 @@ const authenticate = () => (req, res, next) => {
         res.clearCookie('jwt')
         throw new ERROR.InvalidTokenError('Invalid token')
     }
+    
     next();
 };
 

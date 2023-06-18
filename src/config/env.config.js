@@ -9,7 +9,8 @@ const config = {
     authRoles: {
         admin: "admin",
         user: "user",
-    }
+    },
+    api_key:process.env.API_KEY,
 };
 
 export default config;

@@ -1,13 +1,13 @@
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
-import request from 'supertest';
-import { app } from '../app.js';
+
 
 let mongo; // Declare the mongo variable
 
 // config run before all test
 beforeAll(async () => {
-    process.env.JWT_KEY = '132456';
+    //to skip api key check in test env
+    process.env.TEST = true;
 
     mongo = await MongoMemoryServer.create();
     const mongoUri = mongo.getUri();
