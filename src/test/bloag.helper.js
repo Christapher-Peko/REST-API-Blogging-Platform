@@ -13,7 +13,7 @@ async function createBlog() {
         .post('/api/v1/auth/signup')
         .send({
             user_name: 'Test Name',
-            email: 'a@a.com',
+            email: 'a@h.com',
             password: 'password',
             confirm_password: 'password'
         })
@@ -21,7 +21,7 @@ async function createBlog() {
     const authResponse = await request(app)
         .post('/api/v1/auth/signin')
         .send({
-            email: 'a@a.com',
+            email: 'a@h.com',
             password: 'password',
         })
         .expect(200)
@@ -46,7 +46,7 @@ async function createBlogAndCookie() {
         .post('/api/v1/auth/signup')
         .send({
             user_name: 'Test Name',
-            email: 'a@a.com',
+            email: 'a@g.com',
             password: 'password',
             confirm_password: 'password'
         })
@@ -54,7 +54,7 @@ async function createBlogAndCookie() {
     const authResponse = await request(app)
         .post('/api/v1/auth/signin')
         .send({
-            email: 'a@a.com',
+            email: 'a@g.com',
             password: 'password',
         })
         .expect(200)

@@ -9,6 +9,7 @@ import errorHandlingMiddleware from "./middleware/errorHandlingMiddleware.js";
 import { successResponse } from "./middleware/successResponse.js";
 import authenticate from "./middleware/authenticate.js";
 import checkApiKey from "./middleware/checkApiKey.js";
+import corsOptions from "./config/cors.options.js";
 
 const app = express()
 const router = express.Router()
@@ -16,7 +17,7 @@ const router = express.Router()
 //middleware
 app.use(successResponse)  //handle success response
 
-app.use(cors())
+app.use(cors(corsOptions))
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(cookieParser());

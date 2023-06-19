@@ -12,13 +12,13 @@ const authServices = {
         return await bcrypt.compare(string.toString(), hashedString);;
     },
     generateToken: async (payload) => {
-        const token = jwt.sign(payload, config.jwtSecret, {
+        const token = jwt.sign(payload,  process.env.JWT_SECRET, {
             expiresIn: '1h',
         });
         return token
     },
     verifyToken: async (token) => {
-        return jwt.verify(token, config.jwtSecret)
+        return jwt.verify(token,  process.env.JWT_SECRET)
     },
 
     attachTokenToCookie: (cookieName, Token, res) => {
