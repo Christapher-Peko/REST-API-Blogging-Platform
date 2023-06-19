@@ -6,8 +6,13 @@ let mongo; // Declare the mongo variable
 
 // config run before all test
 beforeAll(async () => {
+    //test env's
+    process.env.JWT_SECRET = "123456";
     //to skip api key check in test env
     process.env.TEST = true;
+    
+
+
 
     mongo = await MongoMemoryServer.create();
     const mongoUri = mongo.getUri();
@@ -17,7 +22,7 @@ beforeAll(async () => {
         // useUnifiedTopology: true
     });
 });
- 
+
 // config run before each test - clear DB
 beforeEach(async () => {
     const collections = await mongoose.connection.db.collections();

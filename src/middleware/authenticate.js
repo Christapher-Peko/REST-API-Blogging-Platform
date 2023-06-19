@@ -9,7 +9,7 @@ const authenticate = () => (req, res, next) => {
     }
 
     try {
-        const payload = jwt.verify(req.cookies['jwt'], config.jwtSecret);
+        const payload = jwt.verify(req.cookies['jwt'],  process.env.JWT_SECRET);
         req.currentUser = payload;
     } catch (error) {
         res.clearCookie('jwt')
