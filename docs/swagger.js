@@ -8,7 +8,7 @@ const options = {
             version: "1.0.0",
             description: `Welcome to the API documentation for the Blog Application. This documentation provides comprehensive details about the available endpoints and their usage. It also offers an overview of the application's functionalities and source code.
 
-To explore the complete functionalities and access the source code, please visit the <a href='https://github.com/ChristapherAntony/BlogApplication'>GitHub repository</a>.
+To explore the complete functionalities and access the source code, please visit the <a href='https://github.com/ChristapherAntony/REST-API-Blogging-Platform'>GitHub repository</a>.
 
 Try It Out:
 To test the API endpoints, please select the deployed server from the list below and authorize the requests with the following API key:

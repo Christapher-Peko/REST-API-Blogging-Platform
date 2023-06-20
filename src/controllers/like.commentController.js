@@ -33,10 +33,6 @@ const likeCommentController = {
 
         return res.success(200, 'Blog Commented successfully',commentedBlog);
     }),
-
-
-
-
 };
 
 
