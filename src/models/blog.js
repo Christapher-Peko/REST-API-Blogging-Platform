@@ -28,26 +28,26 @@ const blogPostSchema = new Schema(
             type: String,
         },
         likes: {
-            type: Number,
-            default: 0,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Like', 
         },
-        comments: [
-            {
-                author: {
-                    type: String,
-                },
-                content: {
-                    type: String,
-                },
-                timestamp: {
-                    type: Date,
-                    default: Date.now,
-                },
-            },
-        ],
+        comments: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Comment',
+        },
 
     }
 );
+
+blogPostSchema.pre('save', async function (next) {
+    if (!this.likes) {
+        this.likes = this._id;
+    }
+    if (!this.comments) {
+        this.comments = this._id;
+    }
+    next();
+});
 
 blogPostSchema.set('toJSON', {
     transform: function (doc, ret) {
