@@ -81,4 +81,16 @@ const validateCreateBlog = [
     handleValidationErrors,
 ];
 
-export { validationSignup, validateSignin,validateCreateBlog };
+const validateComment = [
+    body('*').trim().escape(),
+    body('comment')
+        .notEmpty()
+        .withMessage('Comment is required')
+        .isLength({ max: 100 })
+        .withMessage('Title must be less than or equal to 100 characters'),
+
+    handleValidationErrors,
+];
+
+
+export { validationSignup, validateSignin,validateCreateBlog,validateComment };

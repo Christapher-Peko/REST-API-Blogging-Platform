@@ -15,6 +15,7 @@ const blogController = {
         // Create blog
         const blogData = { title, content, author, tags };
         const blog = await blogRepositories.createBlog(blogData);
+         await blogRepositories.createLikeAndComment(blog._id)
 
         return res.success(201, 'Blog created successfully', blog);
     }),

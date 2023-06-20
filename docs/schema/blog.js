@@ -15,42 +15,68 @@
  *          type: string
  *          default: Example Content
  *    CreateBlogResponse:
- *      type: object
- *      properties:
- *        _id:
- *          type: string
- *          example: abc123
- *        title:
- *          type: string
- *          example: Example Title
- *        content:
- *          type: string
- *          example: Example Content
- *        author:
- *          type: string
- *          example: John Doe
- *        publishedDate:
- *          type: string
- *        tags:
- *          type: array
- *          items:
- *            type: string
- *        featuredImage:
- *          type: string
- *        likes:
- *          type: number
- *        comments:
- *          type: array
- *          items:
- *            type: object
- *            properties:
- *              author:
- *                type: string
- *              content:
- *                type: string
- *              timestamp:
- *                type: string
+ *         $ref: '#/components/schemas/BlogPost'
  */
+
+
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     LikedBlogsResponse:
+ *       type: object
+ *       properties:
+ *         message:
+ *           type: string
+ *           example: Blog liked successfully
+ *           description: A message indicating the success of liking a blog.
+ *         data:
+ *           type: object
+ *           properties:
+ *             likedBlog:
+ *               $ref: '#/components/schemas/BlogPost'
+ *           description: The details of the liked blog.
+ */
+
+/**
+ * @openapi
+ * components:
+ *  schemas:
+ *    CommentRequest:
+ *      type: object
+ *      required:
+ *        - comment
+ *      properties:
+ *        comment:
+ *          type: string
+ *          default: Good post very interesting
+ */
+
+
+
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     CommentedBlogResponse:
+ *       type: object
+ *       properties:
+ *         message:
+ *           type: string
+ *           example: Blog Commented successfully
+ *           description: A message indicating the success of CommentedBlogResponse a blog.
+ *         data:
+ *           type: object
+ *           properties:
+ *             likedBlog:
+ *               $ref: '#/components/schemas/BlogPost'
+ *           description: The details of the CommentedBlogResponse blog.
+ */
+
+
+
+
+
 
 
 /**
@@ -110,22 +136,17 @@
  *           type: string
  *           example: https://example.com/image.jpg
  *         likes:
- *           type: number
- *           example: 10
+ *           type: object
+ *           properties:
+ *               totalLikes:
+ *                 type: number
+ *                 example: 10
  *         comments:
- *           type: array
- *           items:
- *             type: object
- *             properties:
- *               author:
- *                 type: string
- *                 example: Jane Smith
- *               content:
- *                 type: string
- *                 example: This is a comment.
- *               timestamp:
- *                 type: string
- *                 example: 2023-06-17T10:30:00Z
+ *           type: object
+ *           properties:
+ *               totalComments:
+ *                 type: number
+ *                 example: 15
  */
 
 
@@ -137,48 +158,7 @@
  * components:
  *   schemas:
  *     GetBlogByIdResponse:
- *       type: object
- *       properties:
- *         _id:
- *           type: string
- *           example: abc123
- *         title:
- *           type: string
- *           example: Example Title
- *         content:
- *           type: string
- *           example: Example Content
- *         author:
- *           type: string
- *           example: John Doe
- *         publishedDate:
- *           type: string
- *           example: 2023-06-17
- *         tags:
- *           type: array
- *           items:
- *             type: string
- *           example: [Tag1, Tag2]
- *         featuredImage:
- *           type: string
- *           example: https://example.com/image.jpg
- *         likes:
- *           type: number
- *           example: 10
- *         comments:
- *           type: array
- *           items:
- *             type: object
- *             properties:
- *               author:
- *                 type: string
- *                 example: Jane Smith
- *               content:
- *                 type: string
- *                 example: This is a comment.
- *               timestamp:
- *                 type: string
- *                 example: 2023-06-17T10:30:00Z
+ *       $ref: '#/components/schemas/BlogPost'
  */
 
 
@@ -199,46 +179,5 @@
  *           type: string
  *           example: Updated Content
  *     UpdateBlogResponse:
- *       type: object
- *       properties:
- *         _id:
- *           type: string
- *           example: abc123
- *         title:
- *           type: string
- *           example: Updated Title
- *         content:
- *           type: string
- *           example: Updated Content
- *         author:
- *           type: string
- *           example: John Doe
- *         publishedDate:
- *           type: string
- *           example: 2023-06-17
- *         tags:
- *           type: array
- *           items:
- *             type: string
- *           example: [Tag1, Tag2]
- *         featuredImage:
- *           type: string
- *           example: https://example.com/image.jpg
- *         likes:
- *           type: number
- *           example: 10
- *         comments:
- *           type: array
- *           items:
- *             type: object
- *             properties:
- *               author:
- *                 type: string
- *                 example: Jane Smith
- *               content:
- *                 type: string
- *                 example: This is a comment.
- *               timestamp:
- *                 type: string
- *                 example: 2023-06-17T10:30:00Z
+ *       $ref: '#/components/schemas/BlogPost'
  */

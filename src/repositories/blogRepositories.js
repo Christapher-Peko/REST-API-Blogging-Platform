@@ -1,11 +1,20 @@
 import Blog from "../models/blog.js";
+import Comment from "../models/comment.js";
+import Like from "../models/like.js";
+import { ERROR } from "../utils/errors.js";
 
 const blogRepositories = {
-
     createBlog: async (blogData) => {
         const blog = new Blog(blogData);
         await blog.save();
-        return await blog.populate('author')
+
+        const populatedBlog = await blog.populate([
+            { path: 'author' },
+            { path: 'likes', select: '-_id totalLikes' },
+            { path: 'comments', select: '-_id totalComments' }
+        ])
+
+        return populatedBlog;
     },
 
     deleteBlog: async (blogId) => {
@@ -13,17 +22,18 @@ const blogRepositories = {
     },
 
     getAllBlogs: async (page, limit) => {
-
-        const pageNumber = parseInt(page) || 1; // Parse the page number (default: 1)
-        const pageSize = parseInt(limit) || 10; // Parse the page size (default: 10)
-
-        const totalCount = await Blog.countDocuments(); // Get the total count of blogs
+        const pageNumber = parseInt(page) || 1;
+        const pageSize = parseInt(limit) || 10;
+        const totalCount = await Blog.countDocuments();
 
         const blogs = await Blog.find()
-            .populate('author')
             .skip((pageNumber - 1) * pageSize)
-            .limit(pageSize);
-
+            .limit(pageSize)
+            .populate([
+                { path: 'author' },
+                { path: 'likes', select: '-_id totalLikes' },
+                { path: 'comments', select: '-_id totalComments' }
+            ])
         return {
             meta: {
                 pageNumber: pageNumber,
@@ -32,23 +42,92 @@ const blogRepositories = {
                 totalPages: Math.ceil(totalCount / pageSize),
             },
             data: blogs,
-
-        }
-
+        };
     },
 
-    // getAllBlogs: async () => {
-    //     return await Blog.find().populate('author');
-    // },
-
     getBlogById: async (blogId) => {
-        return await Blog.findById(blogId).populate('author');
+        return await Blog.findById(blogId)
+            .populate([
+                { path: 'author' },
+                { path: 'likes', select: '-_id totalLikes' },
+                { path: 'comments', select: '-_id totalComments' }
+            ]);
     },
 
 
     updateBlog: async (blogId, updatedData) => {
-        return await Blog.findByIdAndUpdate(blogId, updatedData, { new: true }).populate('author');
+        return await Blog.findByIdAndUpdate(blogId, updatedData, { new: true })
+            .populate([
+                { path: 'author' },
+                { path: 'likes', select: '-_id totalLikes' },
+                { path: 'comments', select: '-_id totalComments' }
+            ]);
     },
+
+    createLikeAndComment: async (blogId) => {
+        const doc = new Like({ _id: blogId });
+        await doc.save();
+
+        const docs = new Comment({ _id: blogId });
+        await docs.save();
+
+    },
+
+
+    likeBlog: async (blogId, userId) => {
+        const blog = await Blog.findById(blogId);
+        if (!blog) {
+            throw new ERROR.NotFoundError('Blog not found')
+        }
+
+        const like = await Like.findOne({ _id: blogId });
+        if (!like) {
+            throw new ERROR.NotFoundError('Like data not found')
+        }
+
+        const existingLike = like.likes.find(like => like.userId.toString() === userId.toString());
+        if (existingLike) {
+            throw new ERROR.ConflictError('User has already liked the blog')
+        }
+
+        like.likes.push({ userId });
+        like.totalLikes++;
+        await like.save();
+
+        return await Blog.findById(blogId)
+            .populate([
+                { path: 'author' },
+                { path: 'likes', select: '-_id totalLikes' },
+                { path: 'comments', select: '-_id totalComments' }
+            ]);
+    },
+
+    commentBlog: async (blogId, comment, userId) => {
+        const blog = await Blog.findById(blogId);
+        if (!blog) {
+            throw new ERROR.NotFoundError('Blog not found')
+        }
+
+        const comments = await Comment.findOne({ _id: blogId });
+        if (!comments) {
+            throw new ERROR.NotFoundError('Comment data not found')
+        }
+
+        comments.comments.push({ userId, comment });
+        comments.totalComments++;
+        await comments.save();
+
+        return await Blog.findById(blogId)
+            .populate([
+                { path: 'author' },
+                { path: 'likes', select: '-_id totalLikes' },
+                { path: 'comments', select: '-_id totalComments' }
+            ]);
+    },
+
+
 };
 
 export default blogRepositories;
+
+

@@ -12,6 +12,7 @@ const createErrorClass = (name, statusCode) => {
 export const ERROR = {
     HttpError: createErrorClass('HttpError', 500),
     UserExistsError: createErrorClass('UserExistsError', 409), 
+    ConflictError: createErrorClass('ConflictError', 409), 
     NotFoundError: createErrorClass('NotFoundError', 404),
     BadRequestError: createErrorClass('BadRequestError', 400),
     InvalidInputError: createErrorClass('InvalidInputError', 422),

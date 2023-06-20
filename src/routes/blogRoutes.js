@@ -1,6 +1,7 @@
 import blogController from "../controllers/blogController.js";
+import likeCommentController from "../controllers/like.commentController.js";
 import authorize from "../middleware/authorize.js";
-import { validateCreateBlog } from "../middleware/validate.js";
+import { validateComment, validateCreateBlog } from "../middleware/validate.js";
 
 const blogRouter = (router) => {
 
@@ -234,6 +235,88 @@ const blogRouter = (router) => {
    *               $ref: '#/components/schemas/Error'
    */
   router.route('/:id').delete(authorize(), blogController.deleteBlog);
+
+
+
+  /**
+   * @openapi
+   * '/api/v1/blogs/{id}/like':
+   *   post:
+   *     tags:
+   *       - Likes
+   *     summary: Like a blog by ID
+   *     description: Like a specific blog by specifying its unique ID. This endpoint allows users to like a blog post.
+   *     parameters:
+   *       - in: path
+   *         name: id
+   *         required: true
+   *         schema:
+   *           type: string
+   *         description: The ID of the blog to like.
+   *     responses:
+   *       200:
+   *         description: Successful operation. The blog has been successfully liked.
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/LikedBlogsResponse'
+   *       401:
+   *         description: Unauthorized. User not authenticated.
+   *       404:
+   *         description: The requested blog was not found.
+   *       500:
+   *         description: Internal server error occurred while processing the request.
+   */
+  router.post('/:id/like', authorize(), likeCommentController.likeBlog);
+
+
+  /**
+ * @openapi
+ * '/api/v1/blogs/{id}/comment':
+ *   post:
+ *     tags:
+ *       - Comments
+ *     summary: Add a comment to a blog
+ *     description: Add a comment to a specific blog by specifying its unique ID. This endpoint allows users to post comments on a blog.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the blog to comment on.
+ *     requestBody:
+ *       description: Comment object
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/CommentRequest'
+ *     responses:
+ *       200:
+ *         description: Successful operation. The comment has been successfully added.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/CommentedBlogResponse'
+ *       401:
+ *         description: Unauthorized. User not authenticated.
+ *       404:
+ *         description: The requested blog was not found.
+ *       500:
+ *         description: Internal server error occurred while processing the request.
+ */
+  router.post('/:id/comment', authorize(), validateComment, likeCommentController.addComment);
+
+  
+
+
+
+
+
+
+
+
 
 
   return router;

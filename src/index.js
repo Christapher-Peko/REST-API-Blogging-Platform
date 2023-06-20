@@ -2,6 +2,7 @@ import connectDb from "./config/db.config.js";
 import config from "./config/env.config.js";
 import swaggerDocs from "../docs/swagger.js";
 import { app } from "./app.js";
+import { create } from "../dummyentry.js";
 
 // Start server
 const start = async () => {
@@ -12,3 +13,4 @@ const start = async () => {
     });
 };
 start();
+
