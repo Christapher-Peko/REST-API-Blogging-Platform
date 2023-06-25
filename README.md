@@ -23,7 +23,7 @@ This project implements a RESTful API for a Blogging Platform using Node.js, Exp
 - API documentation with Swagger
 
 ## API documentation
-The API documentation is available at [API Docs](https://testserver2.tk/api-docs). It provides details about the available endpoints, request/response structures, and examples.
+The API documentation is available at [API Docs]([https://testserver2.tk/api-docs](https://rest-api-blogging-platform-production.up.railway.app/api-docs/)). It provides details about the available endpoints, request/response structures, and examples.
 
 ## Folder Structure
 
