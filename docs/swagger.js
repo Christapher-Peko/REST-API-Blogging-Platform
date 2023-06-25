@@ -26,17 +26,17 @@ christapher012@gmail.com
 
         },
 
-        servers: [
-            {
-                url: "https://testserver2.tk/",
-                description: "This is a deployed server"
-            },
-            {
-                url: "http://localhost:3000/",
-                description: "This is a development server"
-            },
+        // servers: [
+        //     {
+        //         url: "https://testserver2.tk/",
+        //         description: "This is a deployed server"
+        //     },
+        //     {
+        //         url: "http://localhost:3000/",
+        //         description: "This is a development server"
+        //     },
             
-        ],
+        // ],
         components: {
             securitySchemes: {
                 ApiKeyAuth: {
